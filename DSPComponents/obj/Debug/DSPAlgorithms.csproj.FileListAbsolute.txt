@@ -4,3 +4,9 @@ D:\Study\Semester 7\DSP\Labs\Lab 1\Package and Task\fcisdsp-dsp.toolbox-78ddd969
 D:\Study\Semester 7\DSP\Labs\Lab 1\Package and Task\fcisdsp-dsp.toolbox-78ddd969882b\DSPToolbox\DSPComponents\obj\Debug\DSPAlgorithms.csproj.CoreCompileInputs.cache
 D:\Study\Semester 7\DSP\Labs\Lab 1\Package and Task\fcisdsp-dsp.toolbox-78ddd969882b\DSPToolbox\DSPComponents\obj\Debug\DSPComponents.dll
 D:\Study\Semester 7\DSP\Labs\Lab 1\Package and Task\fcisdsp-dsp.toolbox-78ddd969882b\DSPToolbox\DSPComponents\obj\Debug\DSPComponents.pdb
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPComponents\bin\Debug\DSPComponents.dll
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPComponents\bin\Debug\DSPComponents.pdb
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPComponents\obj\Debug\DSPAlgorithms.csproj.AssemblyReference.cache
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPComponents\obj\Debug\DSPAlgorithms.csproj.CoreCompileInputs.cache
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPComponents\obj\Debug\DSPComponents.dll
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPComponents\obj\Debug\DSPComponents.pdb

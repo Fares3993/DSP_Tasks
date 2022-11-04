@@ -90,3 +90,32 @@ D:\Study\Semester 7\DSP\Labs\Lab 1\Package and Task\fcisdsp-dsp.toolbox-78ddd969
 D:\Study\Semester 7\DSP\Labs\Lab 1\Package and Task\fcisdsp-dsp.toolbox-78ddd969882b\DSPToolbox\DSPUI\obj\Debug\DSPUI.csproj.CopyComplete
 D:\Study\Semester 7\DSP\Labs\Lab 1\Package and Task\fcisdsp-dsp.toolbox-78ddd969882b\DSPToolbox\DSPUI\obj\Debug\DSPUI.exe
 D:\Study\Semester 7\DSP\Labs\Lab 1\Package and Task\fcisdsp-dsp.toolbox-78ddd969882b\DSPToolbox\DSPUI\obj\Debug\DSPUI.pdb
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\Media\Warning.png
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\DSPUI.exe.config
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\DSPUI.exe
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\DSPUI.pdb
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\DSPComponents.dll
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\OxyPlot.dll
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\OxyPlot.WindowsForms.dll
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\DSPComponents.pdb
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\OxyPlot.pdb
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\OxyPlot.xml
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\OxyPlot.WindowsForms.pdb
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\bin\Debug\OxyPlot.WindowsForms.xml
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.csproj.AssemblyReference.cache
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.ComponentsAttriutesEditor.DiscreteFourierTransform.resources
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.ComponentsAttriutesEditor.FastFourierTransform.resources
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.ComponentsAttriutesEditor.FileInputSignal.resources
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.ComponentsAttriutesEditor.FIR.resources
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.ComponentsAttriutesEditor.MovingAverage.resources
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.ComponentsAttriutesEditor.MultiplySignalByConstant.resources
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.ComponentsAttriutesEditor.Normalizer.resources
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.ComponentsAttriutesEditor.QuantizationAndEncoding.resources
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.ComponentsAttriutesEditor.Shifter.resources
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.DSPToolbox.resources
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.Properties.Resources.resources
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.csproj.GenerateResource.cache
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.csproj.CoreCompileInputs.cache
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.csproj.CopyComplete
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.exe
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.pdb
