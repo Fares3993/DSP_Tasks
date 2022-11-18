@@ -18,7 +18,7 @@ namespace DSPAlgorithms.Algorithms
         {
             List<float> InputSamples = InputSignal.Samples;
             List<float> FOutSamples = new List<float>();
-            List<float> SOutSamples = new List<float>() { 0 };
+            List<float> SOutSamples = new List<float>();
 
             for (int i = 0; i < InputSamples.Count; i++)
             {
