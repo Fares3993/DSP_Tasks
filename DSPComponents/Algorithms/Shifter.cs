@@ -17,16 +17,16 @@ namespace DSPAlgorithms.Algorithms
         public override void Run()
         {
             List<int> NewIndex = new List<int>();
-            if (/*Folder.FoldedCount % 2 != 0*/InputSignal.Samples[0] == 1)
+
+            if (InputSignal.Periodic)
                 Fsign = -1;
-            //else if (Folder.FoldedCount % 2 == 0)
-            //    Fsign = 1;
+            
             for (int i = 0; i < InputSignal.Samples.Count; i++)
             {
-                InputSignal.SamplesIndices[i] = InputSignal.SamplesIndices[i] + (ShiftingValue*Fsign);
-                NewIndex.Add(InputSignal.SamplesIndices[i]);
+                NewIndex.Add(InputSignal.SamplesIndices[i] - (ShiftingValue * Fsign));
             }
-            OutputShiftedSignal = new Signal(InputSignal.Samples, NewIndex, false);
+
+            OutputShiftedSignal = new Signal(InputSignal.Samples, NewIndex, InputSignal.Periodic);
         }
     }
 }

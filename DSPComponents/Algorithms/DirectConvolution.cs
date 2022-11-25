@@ -19,27 +19,11 @@ namespace DSPAlgorithms.Algorithms
         public override void Run()
         {
             
-            int start = 0;
             int size = InputSignal1.Samples.Count + InputSignal2.Samples.Count - 1;
+            int start = InputSignal1.SamplesIndices[0] + InputSignal2.SamplesIndices[0];
 
             List<float> samples = new List<float>();
             List<int> indices = new List<int>();
-
-            if (InputSignal1.SamplesIndices[0] < InputSignal2.SamplesIndices[0])
-            {
-                start = InputSignal1.SamplesIndices[0];
-            }
-
-            if (InputSignal2.SamplesIndices[0] < 0)
-            {
-                for (int i = InputSignal2.SamplesIndices[0]; i < 0; i++)
-                {
-                    InputSignal1.Samples.RemoveAt(InputSignal1.Samples.Count - 1);
-                    InputSignal1.SamplesIndices.RemoveAt(InputSignal1.SamplesIndices.Count - 1);
-                    start--;
-                    size--;
-                }
-            }
 
             for (int i = 0; i < size; i++)
             {
