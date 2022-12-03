@@ -13,7 +13,7 @@ namespace DSPAlgorithms.Algorithms
         public Signal InputSignal1 { get; set; }
         public Signal InputSignal2 { get; set; }
         public Signal OutputConvolvedSignal { get; set; }
-        public List<Complex> L = new List<Complex>();
+        public List<Complex> Convolved = new List<Complex>();
         public List<float> Amplitudes = new List<float>();
         public List<float> PhaseShifts = new List<float>();
         /// <summary>
@@ -22,43 +22,43 @@ namespace DSPAlgorithms.Algorithms
         public override void Run()
 
         {
-
-            int length = InputSignal1.Samples.Count + InputSignal2.Samples.Count - 1;
-            for (int i = InputSignal1.Samples.Count; i < length; i++)
+            int l = InputSignal1.Samples.Count + InputSignal2.Samples.Count - 1;
+            for (int idx = InputSignal1.Samples.Count; idx < l; idx++)
             {
                 InputSignal1.Samples.Add(0);
             }
-            for (int j = InputSignal2.Samples.Count; j < length; j++)
+            for (int idx = InputSignal2.Samples.Count; idx < l; idx++)
             {
                 InputSignal2.Samples.Add(0);
             }
 
             DiscreteFourierTransform DFT1 = new DiscreteFourierTransform();
-            DFT1.InputTimeDomainSignal =InputSignal1;
+            DFT1.InputTimeDomainSignal = InputSignal1;
             DFT1.Run();
             List<float> Amplitudes1 = new List<float>(DFT1.OutputFreqDomainSignal.FrequenciesAmplitudes);
             List<float> PhaseShifts1 = new List<float>(DFT1.OutputFreqDomainSignal.FrequenciesPhaseShifts);
 
-
-
             DiscreteFourierTransform DFT2 = new DiscreteFourierTransform();
             DFT2.InputTimeDomainSignal = InputSignal2;
             DFT2.Run();
-
             List<float> Amplitudes2 = new List<float>(DFT2.OutputFreqDomainSignal.FrequenciesAmplitudes);
             List<float> PhaseShifts2 = new List<float>(DFT2.OutputFreqDomainSignal.FrequenciesPhaseShifts);
-
+            double Real1, Imaginary1, Real2, Imaginary2;
             for (int i = 0; i < DFT1.OutputFreqDomainSignal.Samples.Count; i++)
             {
-                L.Add(Complex.Multiply( Complex.FromPolarCoordinates(Amplitudes1[i], PhaseShifts1[i]) , Complex.FromPolarCoordinates(Amplitudes2[i], PhaseShifts2[i])));
-                Amplitudes.Add((float)L[i].Magnitude);
-                PhaseShifts.Add((float)L[i].Phase);
+                Real1 = Amplitudes1[i] * Math.Cos(PhaseShifts1[i]);
+                Imaginary1 = Amplitudes1[i] * Math.Sin(PhaseShifts1[i]);
+                Real2 = Amplitudes2[i] * Math.Cos(PhaseShifts2[i]);
+                Imaginary2 = Amplitudes2[i] * Math.Sin(PhaseShifts2[i]);
+
+                Convolved.Add(Complex.Multiply( new Complex(Real1,Imaginary1) , new Complex(Real2, Imaginary2)));
+                Amplitudes.Add((float)Convolved[i].Magnitude);
+                PhaseShifts.Add((float)Convolved[i].Phase);
             }
             InverseDiscreteFourierTransform IDFT = new InverseDiscreteFourierTransform();
             IDFT.InputFreqDomainSignal = new Signal(false,new List<float>(),new List<float>(Amplitudes), new List<float>(PhaseShifts));
             IDFT.Run();
             OutputConvolvedSignal = IDFT.OutputTimeDomainSignal;
-
         }
     }
 }

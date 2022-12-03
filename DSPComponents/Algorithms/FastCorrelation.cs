@@ -14,7 +14,7 @@ namespace DSPAlgorithms.Algorithms
         public Signal InputSignal2 { get; set; }
         public List<float> OutputNonNormalizedCorrelation { get; set; }
         public List<float> OutputNormalizedCorrelation { get; set; }
-        public List<Complex> L = new List<Complex>();
+        public List<Complex> Convolved = new List<Complex>();
         public List<float> Amplitudes = new List<float>();
         public List<float> PhaseShifts = new List<float>();
         public override void Run()
@@ -29,7 +29,6 @@ namespace DSPAlgorithms.Algorithms
                 
             }
             s2 = InputSignal2.Samples;
-
             float p1 = 0;
             float p2 = 0;
 
@@ -54,12 +53,17 @@ namespace DSPAlgorithms.Algorithms
 
             List<float> Amplitudes2 = new List<float>(DFT2.OutputFreqDomainSignal.FrequenciesAmplitudes);
             List<float> PhaseShifts2 = new List<float>(DFT2.OutputFreqDomainSignal.FrequenciesPhaseShifts);
-
+            double Real1, Imaginary1, Real2, Imaginary2;
             for (int i = 0; i < DFT1.OutputFreqDomainSignal.Samples.Count; i++)
             {
-                L.Add(Complex.Multiply(Complex.Conjugate(Complex.FromPolarCoordinates(Amplitudes1[i], PhaseShifts1[i])), Complex.FromPolarCoordinates(Amplitudes2[i], PhaseShifts2[i])));
-                Amplitudes.Add((float)L[i].Magnitude);
-                PhaseShifts.Add((float)L[i].Phase);
+                Real1 = Amplitudes1[i] * Math.Cos(PhaseShifts1[i]);
+                Imaginary1 = Amplitudes1[i] * Math.Sin(PhaseShifts1[i]);
+                Real2 = Amplitudes2[i] * Math.Cos(PhaseShifts2[i]);
+                Imaginary2 = Amplitudes2[i] * Math.Sin(PhaseShifts2[i]);
+
+                Convolved.Add(Complex.Multiply(Complex.Conjugate( new Complex(Real1,Imaginary1)) , new Complex(Real2, Imaginary2)));
+                Amplitudes.Add((float)Convolved[i].Magnitude);
+                PhaseShifts.Add((float)Convolved[i].Phase);
             }
             InverseDiscreteFourierTransform IDFT = new InverseDiscreteFourierTransform();
             IDFT.InputFreqDomainSignal = new Signal(false, new List<float>(), new List<float>(Amplitudes), new List<float>(PhaseShifts));

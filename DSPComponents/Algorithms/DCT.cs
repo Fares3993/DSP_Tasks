@@ -11,21 +11,24 @@ namespace DSPAlgorithms.Algorithms
     {
         public Signal InputSignal { get; set; }
         public Signal OutputSignal { get; set; }
-        public List<float> Values = new List<float>();
+        public List<float> outputSignal = new List<float>();
         public override void Run()
         {
             int N = InputSignal.Samples.Count;
-            
-            for(int k = 0; k < N ;k++)
+            double T1, T2, T3;
+            for (int k = 0; k < N ;k++)
             {
-                double sum = 0;
-                for (int i = 0; i < N; i++)
+                double Sum = 0;
+                for (int n = 0; n < N; n++)
                 {
-                    sum+=InputSignal.Samples[i] * (Math.Cos((Math.PI / (4 * N)) * (2 * i - 1) * (2 * k - 1)));
+                     T1 = Math.PI / (4 * N);
+                     T2 = 2 * n - 1;
+                     T3 = 2 * k - 1;
+                    Sum +=InputSignal.Samples[n] * Math.Cos(T1* T2 * T3);
                 }
-                Values.Add( (float)(Math.Sqrt(2.0f/N)*sum));
+                outputSignal.Add( (float)(Math.Sqrt(2.0f/N)*Sum));
             }
-            OutputSignal=new Signal(Values,false);
+            OutputSignal=new Signal(outputSignal,false);
         }
     }
 }
