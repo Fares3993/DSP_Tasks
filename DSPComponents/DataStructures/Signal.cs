@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,6 +59,11 @@ namespace DSPAlgorithms.DataStructures
             Frequencies = _SignalFrequencies;
             FrequenciesAmplitudes = _SignalFrequenciesAmplitudes;
             FrequenciesPhaseShifts = _SignalFrequenciesPhaseShifts;
+        }
+
+        public static implicit operator Signal(List<Complex> v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
