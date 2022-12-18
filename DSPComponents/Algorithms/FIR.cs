@@ -97,7 +97,7 @@ namespace DSPAlgorithms.Algorithms
             }
             OutputHn = new Signal(H_List, H_Indecies, false);
 
-            DirectConvolution conv = new DirectConvolution();
+            FastConvolution conv = new FastConvolution();
             conv.InputSignal1 = InputTimeDomainSignal;
             conv.InputSignal2 = OutputHn;
             conv.Run();

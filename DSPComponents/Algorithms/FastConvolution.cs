@@ -20,26 +20,35 @@ namespace DSPAlgorithms.Algorithms
         /// Convolved InputSignal1 (considered as X) with InputSignal2 (considered as H)
         /// </summary>
         public override void Run()
-
         {
-            int l = InputSignal1.Samples.Count + InputSignal2.Samples.Count - 1;
-            for (int idx = InputSignal1.Samples.Count; idx < l; idx++)
+            Signal temp_signal1 = new Signal(
+                new List<float>(InputSignal1.Samples),
+                new List<int>(InputSignal1.SamplesIndices),
+                InputSignal1.Periodic && true);
+            Signal temp_signal2 = new Signal(
+                new List<float>(InputSignal2.Samples),
+                new List<int>(InputSignal2.SamplesIndices),
+                InputSignal2.Periodic && true);
+
+            int l = temp_signal1.Samples.Count + temp_signal2.Samples.Count - 1;
+
+            for (int idx = temp_signal1.Samples.Count; idx < l; idx++)
             {
-                InputSignal1.Samples.Add(0);
+                temp_signal1.Samples.Add(0);
             }
-            for (int idx = InputSignal2.Samples.Count; idx < l; idx++)
+            for (int idx = temp_signal2.Samples.Count; idx < l; idx++)
             {
-                InputSignal2.Samples.Add(0);
+                temp_signal2.Samples.Add(0);
             }
 
             DiscreteFourierTransform DFT1 = new DiscreteFourierTransform();
-            DFT1.InputTimeDomainSignal = InputSignal1;
+            DFT1.InputTimeDomainSignal = temp_signal1;
             DFT1.Run();
             List<float> Amplitudes1 = new List<float>(DFT1.OutputFreqDomainSignal.FrequenciesAmplitudes);
             List<float> PhaseShifts1 = new List<float>(DFT1.OutputFreqDomainSignal.FrequenciesPhaseShifts);
 
             DiscreteFourierTransform DFT2 = new DiscreteFourierTransform();
-            DFT2.InputTimeDomainSignal = InputSignal2;
+            DFT2.InputTimeDomainSignal = temp_signal2;
             DFT2.Run();
             List<float> Amplitudes2 = new List<float>(DFT2.OutputFreqDomainSignal.FrequenciesAmplitudes);
             List<float> PhaseShifts2 = new List<float>(DFT2.OutputFreqDomainSignal.FrequenciesPhaseShifts);
@@ -58,7 +67,14 @@ namespace DSPAlgorithms.Algorithms
             InverseDiscreteFourierTransform IDFT = new InverseDiscreteFourierTransform();
             IDFT.InputFreqDomainSignal = new Signal(false,new List<float>(),new List<float>(Amplitudes), new List<float>(PhaseShifts));
             IDFT.Run();
+
             OutputConvolvedSignal = IDFT.OutputTimeDomainSignal;
+
+            int start = InputSignal1.SamplesIndices[0] + InputSignal2.SamplesIndices[0];
+            List<int> indices = new List<int>();
+
+            OutputConvolvedSignal.SamplesIndices.ForEach(x => indices.Add(start++));
+            OutputConvolvedSignal.SamplesIndices = indices;
         }
     }
 }
