@@ -18,6 +18,8 @@ namespace DSPAlgorithms.Algorithms
         public int M { get; set; } //downsampling factor
         public Signal OutputFreqDomainSignal { get; set; }
 
+        
+        
         public override void Run()
         {
             Signal InputSignal = LoadSignal(SignalPath);
@@ -31,6 +33,9 @@ namespace DSPAlgorithms.Algorithms
             bpf.InputF2 = maxF;
             bpf.Run();
             Signal Filtered_Signal = bpf.OutputYn;
+            SaveSignalTimeDomain(Filtered_Signal, @"D:\Filtered_Signal.txt");
+            SaveSignalTimeDomain(Filtered_Signal, @"D:\Filtered_Signal.ds");
+
             Sampling Resample = new Sampling();
             DC_Component DC_Remover = new DC_Component();
             Signal Resampled_Signal;
@@ -42,17 +47,20 @@ namespace DSPAlgorithms.Algorithms
                 Resample.Run();
 
                 Resampled_Signal = Resample.OutputSignal;
+                SaveSignalTimeDomain(Resampled_Signal, @"D:\Resampled_Signal.txt");
+                SaveSignalTimeDomain(Resampled_Signal, @"D:\Resampled_Signal.ds");
                 DC_Remover.InputSignal = Resampled_Signal;
-                //DC_Remover.Run();
+                DC_Remover.Run();
             }
             else
             {
                 Console.WriteLine("newFs is not valid");
                 DC_Remover.InputSignal= Filtered_Signal;
-                //DC_Remover.Run();
+                DC_Remover.Run();
             }
-            DC_Remover.Run();
             Signal Removed_DC = DC_Remover.OutputSignal;
+            SaveSignalTimeDomain(Removed_DC, @"D:\Removed_DC.txt");
+            SaveSignalTimeDomain(Removed_DC, @"D:\Removed_DC.ds");
             Normalizer Normalizer = new Normalizer();
             Normalizer.InputSignal = Removed_DC;
             Normalizer.InputMaxRange = 1;
@@ -60,13 +68,56 @@ namespace DSPAlgorithms.Algorithms
             Normalizer.Run();
 
             Signal Normalized_Signal = Normalizer.OutputNormalizedSignal;
+            SaveSignalTimeDomain(Normalized_Signal, @"D:\Normalized_Signal.txt");
+            SaveSignalTimeDomain(Normalized_Signal, @"D:\Normalized_Signal.ds");
             DiscreteFourierTransform DFT = new DiscreteFourierTransform();
             DFT.InputTimeDomainSignal = Normalized_Signal;
             DFT.InputSamplingFrequency = newFs;
             DFT.Run();
             OutputFreqDomainSignal = DFT.OutputFreqDomainSignal;
+            SaveSignalFrequencyDomain(OutputFreqDomainSignal, @"D:\Output_Signal.txt");
+            SaveSignalFrequencyDomain(OutputFreqDomainSignal, @"D:\Output_Signal.ds");
+
 
         }
+
+        public static void SaveSignalTimeDomain(Signal sig, string filePath)
+        {
+            StreamWriter streamSaver = new StreamWriter(filePath);
+
+            streamSaver.WriteLine(0);//timedomain
+            streamSaver.WriteLine(0);//non periodic
+            streamSaver.WriteLine(sig.Samples.Count);//#samples
+
+            for (int i = 0; i < sig.Samples.Count; i++)
+            {
+                streamSaver.Write(sig.SamplesIndices[i]);
+                streamSaver.WriteLine(" " + sig.Samples[i]);
+            }
+
+            streamSaver.Flush();
+            streamSaver.Close();
+        }
+
+        public static void SaveSignalFrequencyDomain(Signal sig, string filePath)
+        {
+            StreamWriter streamSaver = new StreamWriter(filePath);
+
+            streamSaver.WriteLine(1);
+            streamSaver.WriteLine(0);
+            streamSaver.WriteLine(sig.Frequencies.Count);
+
+            for (int i = 0; i < sig.Frequencies.Count; i++)
+            {
+                streamSaver.Write(sig.Frequencies[i]);
+                streamSaver.Write(" " + sig.FrequenciesAmplitudes[i]);
+                streamSaver.WriteLine(" " + sig.FrequenciesPhaseShifts[i]);
+            }
+
+            streamSaver.Flush();
+            streamSaver.Close();
+        }
+
 
         public Signal LoadSignal(string filePath)
         {
@@ -122,5 +173,6 @@ namespace DSPAlgorithms.Algorithms
             stream.Close();
             return new Signal(SigSamples, SigIndices, isPeriodic == 1, SigFreq, SigFreqAmp, SigPhaseShift);
         }
+
     }
 }
