@@ -20,9 +20,10 @@ namespace DSPAlgorithms.Algorithms
             OutputFreqDomainSignal = new Signal(InputTimeDomainSignal.Samples, false);
             OutputFreqDomainSignal.FrequenciesAmplitudes = new List<float>();
             OutputFreqDomainSignal.FrequenciesPhaseShifts = new List<float>();
+            OutputFreqDomainSignal.Frequencies=new List<float>();
             int N_Samples = InputTimeDomainSignal.Samples.Count;
             float Xn;
-            double A , PhaseShift , Real , Imaginary;
+            double A , PhaseShift;
             Complex e, j;
             Complex[] X = new Complex[N_Samples];
             for (int k = 0; k < N_Samples; k++)
@@ -34,14 +35,14 @@ namespace DSPAlgorithms.Algorithms
                     e = Complex.Exp(-j * 2 * Math.PI * k * n / N_Samples);
                     X[k] += Xn * e;
                 }
-                Real = X[k].Real;
-                Imaginary = X[k].Imaginary;
-                A = Math.Sqrt(Math.Pow( Real,2) + Math.Pow(Imaginary, 2));
+  
+                A = (float)X[k].Magnitude;
                 OutputFreqDomainSignal.FrequenciesAmplitudes.Add((float)A);
 
-                PhaseShift = Math.Atan2(Imaginary, Real);
+                PhaseShift = (float)X[k].Phase;
                 OutputFreqDomainSignal.FrequenciesPhaseShifts.Add((float)PhaseShift);
-            }
+                OutputFreqDomainSignal.Frequencies.Add((float)Math.Round(2*Math.PI*InputSamplingFrequency)/N_Samples);
+            } 
         }
     }
 }

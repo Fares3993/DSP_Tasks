@@ -55,7 +55,7 @@ namespace DSPAlgorithms.Algorithms
             Func<int, float> impulseResponse = n => 0;
             if (InputStopBandAttenuation <= 21)
             {
-                N = (int)Math.Round(0.9 / TransitionWidth); 
+                N = (int)Math.Round(0.9 / TransitionWidth);
                 if (N % 2 == 0)
                     N++;
                 impulseResponse = (n) => RectangularImpulseRespnse(n, N);
@@ -87,7 +87,7 @@ namespace DSPAlgorithms.Algorithms
             {
                 float Hd = idealResonse(i);
                 float w = impulseResponse(i);
-                H_List.Add(Hd*w);
+                H_List.Add(Hd * w);
                 H_Indecies.Add(i);
             }
             for (int i = -1; i >= -(N - 1) / 2; i--)
@@ -123,8 +123,8 @@ namespace DSPAlgorithms.Algorithms
         private float BlackmanImpulseRespnse(int n, int N)
         {
             return (float)
-                (0.42 
-                + 0.5 * Math.Cos(2 * Math.PI * n / (N - 1)) 
+                (0.42
+                + 0.5 * Math.Cos(2 * Math.PI * n / (N - 1))
                 + 0.08 * Math.Cos(4 * Math.PI * n / (N - 1)));
         }
         #endregion
@@ -168,7 +168,7 @@ namespace DSPAlgorithms.Algorithms
             {
                 return (float)
                     (2 * f2 * Math.Sin(n * 2 * Math.PI * f2) / (n * 2 * Math.PI * f2)
-                    -2 * f1 * Math.Sin(n * 2 * Math.PI * f1) / (n * 2 * Math.PI * f1));
+                    - 2 * f1 * Math.Sin(n * 2 * Math.PI * f1) / (n * 2 * Math.PI * f1));
             }
         }
 
@@ -182,9 +182,10 @@ namespace DSPAlgorithms.Algorithms
             {
                 return (float)
                     (2 * f1 * Math.Sin(n * 2 * Math.PI * f1) / (n * 2 * Math.PI * f1)
-                    -2 * f2 * Math.Sin(n * 2 * Math.PI * f2) / (n * 2 * Math.PI * f2));
+                    - 2 * f2 * Math.Sin(n * 2 * Math.PI * f2) / (n * 2 * Math.PI * f2));
             }
         }
         #endregion
     }
 }
+

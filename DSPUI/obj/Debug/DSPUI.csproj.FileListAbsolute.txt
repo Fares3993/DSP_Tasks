@@ -207,3 +207,4 @@ C:\Users\Ali01\source\repos\Fares3993\DSP_Tasks\DSPUI\obj\Debug\DSPUI.csproj.Cor
 C:\Users\Ali01\source\repos\Fares3993\DSP_Tasks\DSPUI\obj\Debug\DSPUI.csproj.CopyComplete
 C:\Users\Ali01\source\repos\Fares3993\DSP_Tasks\DSPUI\obj\Debug\DSPUI.exe
 C:\Users\Ali01\source\repos\Fares3993\DSP_Tasks\DSPUI\obj\Debug\DSPUI.pdb
+D:\Study\Semester 7\DSP\Tasks\DSP_Tasks\DSPUI\obj\Debug\DSPUI.csproj.SuggestedBindingRedirects.cache
