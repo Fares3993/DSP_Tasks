@@ -49,7 +49,6 @@ namespace DSPAlgorithms.Algorithms
             for (int i = 0; i < levels; i++)
             {
                 intervals.Add(min, (float)Math.Round(min += delta, 3));
-                //intervals.Add(min, min += delta);
             }
 
             OutputQuantizedSignal = new Signal(outSamples, false);
@@ -58,8 +57,6 @@ namespace DSPAlgorithms.Algorithms
             OutputSamplesError = new List<float>();
 
             InputSignal.Samples.ForEach((sample) => {
-                //if (sample != max)
-                //{
                 for (int i = 0; i < intervals.Count; i++)
                 {
                     float key = intervals.ElementAt(i).Key;
@@ -75,15 +72,6 @@ namespace DSPAlgorithms.Algorithms
                         break;
                     }
                 }
-                //}
-                //else
-                //{
-                //    float mid = max - (delta / 2);
-                //    OutputQuantizedSignal.Samples.Add(mid);
-                //    OutputIntervalIndices.Add(levels);
-                //    OutputEncodedSignal.Add(Convert.ToString(levels - 1, 2).PadLeft(numOfBits, '0'));
-                //    OutputSamplesError.Add(mid - sample);
-                //}
             });
             
 

@@ -20,7 +20,11 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
-            OutputSignal = OverSample();
+            if (M <= 0 && L <= 0) { 
+                // Error
+                return;
+            }
+            OutputSignal = UpSampling();
 
             FIR filter = new FIR();
             filter.InputFilterType = FILTER_TYPES.LOW;
@@ -33,9 +37,9 @@ namespace DSPAlgorithms.Algorithms
             
             OutputSignal = filter.OutputYn;
 
-            OutputSignal = UnderSample();
+            OutputSignal = DownSampling();
         }
-        private Signal OverSample()
+        private Signal UpSampling()
         {            
             List<float> samples = InputSignal.Samples;
 
@@ -55,18 +59,19 @@ namespace DSPAlgorithms.Algorithms
                         out_indices.Add(++first_index);
                     }
                 });
-                // remove the last 2 zeros added after the last sample
-                out_samples.RemoveAt(out_samples.Count - 1);
-                out_samples.RemoveAt(out_samples.Count - 1);
-
-                out_indices.RemoveAt(out_indices.Count - 1);
-                out_indices.RemoveAt(out_indices.Count - 1);
+                
+                // remove the last zeros added after the last sample
+                for (int i = 1; i < L; i++)
+                {
+                    out_samples.RemoveAt(out_samples.Count - 1);
+                    out_indices.RemoveAt(out_indices.Count - 1);
+                }
 
                 return new Signal(out_samples, out_indices, false);
             }
             return InputSignal;
         }
-        private Signal UnderSample()
+        private Signal DownSampling()
         {
             List<float> samples = OutputSignal.Samples;
 

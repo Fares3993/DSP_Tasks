@@ -23,8 +23,9 @@ namespace DSPAlgorithms.Algorithms
         public override void Run()
         {
             Signal InputSignal = LoadSignal(SignalPath);
+            
             FIR bpf =new FIR();
-            bpf.InputFilterType = DSPAlgorithms.DataStructures.FILTER_TYPES.BAND_PASS;
+            bpf.InputFilterType = FILTER_TYPES.BAND_PASS;
             bpf.InputTimeDomainSignal = InputSignal;
             bpf.InputTransitionBand = 500;
             bpf.InputStopBandAttenuation = 50;
@@ -33,22 +34,25 @@ namespace DSPAlgorithms.Algorithms
             bpf.InputF2 = maxF;
             bpf.Run();
             Signal Filtered_Signal = bpf.OutputYn;
-            SaveSignalTimeDomain(Filtered_Signal, @"D:\Filtered_Signal.txt");
-            SaveSignalTimeDomain(Filtered_Signal, @"D:\Filtered_Signal.ds");
+            
+            SaveSignalTimeDomain(Filtered_Signal, "Output_Signals/Filtered_Signal.txt");
+            SaveSignalTimeDomain(Filtered_Signal, "Output_Signals/Filtered_Signal.ds");
 
-            Sampling Resample = new Sampling();
             DC_Component DC_Remover = new DC_Component();
-            Signal Resampled_Signal;
+
             if (newFs>=2*maxF)
             {
+                Sampling Resample = new Sampling();
+                Signal Resampled_Signal;
+
                 Resample.InputSignal = Filtered_Signal;
                 Resample.M = M;
                 Resample.L = L;
                 Resample.Run();
 
                 Resampled_Signal = Resample.OutputSignal;
-                SaveSignalTimeDomain(Resampled_Signal, @"D:\Resampled_Signal.txt");
-                SaveSignalTimeDomain(Resampled_Signal, @"D:\Resampled_Signal.ds");
+                SaveSignalTimeDomain(Resampled_Signal, "Output_Signals/Resampled_Signal.txt");
+                SaveSignalTimeDomain(Resampled_Signal, "Output_Signals/Resampled_Signal.ds");
                 DC_Remover.InputSignal = Resampled_Signal;
                 DC_Remover.Run();
             }
@@ -59,8 +63,8 @@ namespace DSPAlgorithms.Algorithms
                 DC_Remover.Run();
             }
             Signal Removed_DC = DC_Remover.OutputSignal;
-            SaveSignalTimeDomain(Removed_DC, @"D:\Removed_DC.txt");
-            SaveSignalTimeDomain(Removed_DC, @"D:\Removed_DC.ds");
+            SaveSignalTimeDomain(Removed_DC, "Output_Signals/Removed_DC.txt");
+            SaveSignalTimeDomain(Removed_DC, "Output_Signals/Removed_DC.ds");
             Normalizer Normalizer = new Normalizer();
             Normalizer.InputSignal = Removed_DC;
             Normalizer.InputMaxRange = 1;
@@ -68,15 +72,15 @@ namespace DSPAlgorithms.Algorithms
             Normalizer.Run();
 
             Signal Normalized_Signal = Normalizer.OutputNormalizedSignal;
-            SaveSignalTimeDomain(Normalized_Signal, @"D:\Normalized_Signal.txt");
-            SaveSignalTimeDomain(Normalized_Signal, @"D:\Normalized_Signal.ds");
+            SaveSignalTimeDomain(Normalized_Signal, "Output_Signals/Normalized_Signal.txt");
+            SaveSignalTimeDomain(Normalized_Signal, "Output_Signals/Normalized_Signal.ds");
             DiscreteFourierTransform DFT = new DiscreteFourierTransform();
             DFT.InputTimeDomainSignal = Normalized_Signal;
             DFT.InputSamplingFrequency = newFs;
             DFT.Run();
             OutputFreqDomainSignal = DFT.OutputFreqDomainSignal;
-            SaveSignalFrequencyDomain(OutputFreqDomainSignal, @"D:\Output_Signal.txt");
-            SaveSignalFrequencyDomain(OutputFreqDomainSignal, @"D:\Output_Signal.ds");
+            SaveSignalFrequencyDomain(OutputFreqDomainSignal, "Output_Signals/Output_Signal.txt");
+            SaveSignalFrequencyDomain(OutputFreqDomainSignal, "Output_Signals/Output_Signal.ds");
 
 
         }

@@ -27,7 +27,9 @@ namespace DSPAlgorithms.Algorithms
 
             InputSignal.Samples.ForEach(sample => {
                 outSamples.Add(
-                        (sample - oldMin) / (oldMax - oldMin) * (InputMaxRange - InputMinRange) + InputMinRange
+                        (sample - oldMin) / (oldMax - oldMin)
+                        * (InputMaxRange - InputMinRange) 
+                        + InputMinRange
                     );
             });
 

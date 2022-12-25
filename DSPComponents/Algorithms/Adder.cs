@@ -17,12 +17,13 @@ namespace DSPAlgorithms.Algorithms
             int max = 0;
             List<float> output = new List<float>();
 
+            // getting the maximum signal count
             foreach (Signal signal in InputSignals)
             {
                 if (signal.Samples.Count > max)
                     max = signal.Samples.Count;
             }
-            {
+                #region
                 //if (InputSignals[0].Samples.Count > InputSignals[1].Samples.Count)
                 //{
                 //    max = InputSignals[0].Samples.Count;
@@ -31,24 +32,27 @@ namespace DSPAlgorithms.Algorithms
                 //{
                 //    max = InputSignals[1].Samples.Count;
                 //}
-            }
+                #endregion
             for (int i = 0; i < max; i++)
             {
 
                 output.Add(0);
                 foreach (Signal signal in InputSignals)
                 {
-                    if (signal.Samples.Count < max) signal.Samples.Add(0);
+                    // to make sur all samples has the same count
+                    if (signal.Samples.Count < max) 
+                        signal.Samples.Add(0);
+                    
                     output[i] += signal.Samples[i];
                 }
-                {
-                    //if (InputSignals[0].Samples.Count < max)
-                    //    InputSignals[0].Samples[i] = 0;
-                    //if (InputSignals[1].Samples.Count < max)
-                    //    InputSignals[1].Samples[i] = 0;
+                #region
+                //if (InputSignals[0].Samples.Count < max)
+                //    InputSignals[0].Samples[i] = 0;
+                //if (InputSignals[1].Samples.Count < max)
+                //    InputSignals[1].Samples[i] = 0;
 
-                    //output.Add(InputSignals[0].Samples[i] + InputSignals[1].Samples[i] );
-                }
+                //output.Add(InputSignals[0].Samples[i] + InputSignals[1].Samples[i] );
+                #endregion
             }
 
 
